@@ -9,6 +9,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { ChatComponentComponent } from './component/chat-component/chat-component.component';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,7 +28,8 @@ const app = initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChatComponentComponent
   ],
   imports: [
     BrowserModule,
