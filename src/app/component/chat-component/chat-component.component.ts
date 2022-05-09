@@ -18,7 +18,11 @@ export class ChatComponentComponent {
   messageList: any = {
     "introduction": {
       ...this.model,
-      text: "Seja bem-vindo ao Ambulatório da pediatria, poderia informar sobre você? Digite um dos números abaixo.\n1. Sou paciente e é minha primeira vez no HC\n2. Sou paciente cadastrado\n3. Estou levando um paciente",
+      text: "Seja bem-vindo ao Ambulatório da pediatria, poderia informar sobre você? "+
+            "Digite um dos números abaixo.\n"+
+            "1. Sou paciente e é minha primeira vez no HC\n"+
+            "2. Sou paciente cadastrado\n"+
+            "3. Estou levando um paciente",
       options: ['im-pacient-non-registered', 'im-pacient-registered'],
     },
     "im-pacient-non-registered": {
@@ -28,7 +32,15 @@ export class ChatComponentComponent {
             "Uma vez feito o cadastro, qual a razão da visita ao Ambulatório?\n" +
             "1. Consulta \n" +
             "2. Preciso remarcar consulta, pegar um relatório ou tirar uma receita\n" +
-            "3. Preciso de um medicamento, teste, curativo ou outro procedimento\n"
+            "3. Preciso de um medicamento, teste, curativo ou outro procedimento\n",
+      options: ['exam-type', 'talk-to-reception', 'wait'],
+    },
+    "im-pacient-registered": {
+      ...this.model,
+      text: "Qual o motivo da visita?" +
+            "1. Consulta \n" +
+            "2. Remarcação de consulta, relatório ou receita\n" +
+            "3. Preciso de medicamento, teste ou curativo\n"
       ,
       options: ['exam-type', 'talk-to-reception', 'wait'],
     },
@@ -40,6 +52,27 @@ export class ChatComponentComponent {
             "3. Não agendei minha consulta e não recebi email\n"
       ,
       options: ['scheduled-exam', 'not-scheduled-exam-by-email', 'not-scheduled-exam'],
+    },
+    "scheduled-exam": {
+      ...this.model,
+      text: "Retire sua senha física, aguarde para ser atendido e certifique-se que tem seu documento de identidade com foto e o email usado no agendamento.\n",
+      options: ['finish'],
+    },
+    "not-scheduled-exam-by-email": {
+      ...this.model,
+      text: "Dirija-se à recepção da faixa amarela para registrar sua consulta no sistema. Uma vez finalizado, dirija-se à faixa cinza para ser atendido\n"
+      ,
+      options: ['finish'],
+    },
+    "not-scheduled-exam": {
+      ...this.model,
+      text: "Entre em contato com a recepção para que possa ser atendido o mais rápido possível\n"
+      ,
+      options: ['finish'],
+    },
+    "finish": {
+      ...this.model,
+      text: "Despedida\n"
     }
   };
 
@@ -48,8 +81,10 @@ export class ChatComponentComponent {
   lastMessage: any;
 
   sendReply(reply: string){
+    console.log("LAS MESSAGE", this.lastMessage);
     const optionValue: any = this.lastMessage?.options[parseInt(reply)-1];
-    console.log(optionValue)
+    console.log("option value", optionValue)
+    console.log("PROXIMA MENSAGEM")
     console.log(this.messageList[optionValue])
     if (!!this.messageList[optionValue]){
       this.messages.push({
@@ -57,6 +92,7 @@ export class ChatComponentComponent {
         date: new Date(),
         type: 'text',
         reply: false,
+        options: this.messageList[optionValue]?.options,
         user: {
           name: 'Visitante',
           avatar: 'https://i.gifer.com/no.gif',
@@ -78,6 +114,7 @@ export class ChatComponentComponent {
   }
 
   sendMessage(event: any) {
+    console.log("event.message", event.message)
     this.messages.push({
       text: event.message,
       date: new Date(),
