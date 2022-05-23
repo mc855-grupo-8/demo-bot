@@ -81,11 +81,7 @@ export class ChatComponentComponent {
   lastMessage: any;
 
   sendReply(reply: string){
-    console.log("LAS MESSAGE", this.lastMessage);
     const optionValue: any = this.lastMessage?.options[parseInt(reply)-1];
-    console.log("option value", optionValue)
-    console.log("PROXIMA MENSAGEM")
-    console.log(this.messageList[optionValue])
     if (!!this.messageList[optionValue]){
       this.messages.push({
         text: this.messageList[optionValue].text,
@@ -114,7 +110,6 @@ export class ChatComponentComponent {
   }
 
   sendMessage(event: any) {
-    console.log("event.message", event.message)
     this.messages.push({
       text: event.message,
       date: new Date(),
