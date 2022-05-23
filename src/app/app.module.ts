@@ -4,11 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbChatModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbChatModule, NbButtonModule, NbCardModule, NbAccordionModule, NbStepperModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { ChatComponentComponent } from './component/chat-component/chat-component.component';
+import { CreditsComponent } from './component/credits/credits.component';
+import { HomeComponent } from './component/home/home.component';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,16 +30,23 @@ const app = initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChatComponentComponent,
+    CreditsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    NbThemeModule.forRoot({ name: 'dark' }),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
-    NbChatModule
+    NbChatModule,
+    NbButtonModule,
+    NbAccordionModule,
+    NbStepperModule,
+    NbCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

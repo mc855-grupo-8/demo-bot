@@ -1,0 +1,26 @@
+<nb-layout center>
+    <nb-layout-header fixed>
+      <button nbButton status="basic" (click)="returnMainPage()" size="small"> Voltar </button>
+    </nb-layout-header>
+    
+    <nb-layout-column>
+    
+      <nb-chat scrollBottom size="large">
+        <nb-chat-message
+            *ngFor="let msg of messages"
+            [type]="msg.type"
+            [message]="msg.text"
+            [reply]="msg.reply"
+            [sender]="msg.user.name"
+            [date]="msg.date"
+            [files]="msg.files"
+            [avatar]="msg.user.avatar"
+        >
+        </nb-chat-message>
+        <nb-chat-form
+            [dropFiles]="false"
+            (send)="sendMessage($event)"
+        ></nb-chat-form>
+      </nb-chat>
+    </nb-layout-column>
+</nb-layout>
