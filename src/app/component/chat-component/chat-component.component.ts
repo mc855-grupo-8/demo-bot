@@ -1,4 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-component',
@@ -18,7 +19,7 @@ export class ChatComponentComponent {
   messageList: any = {
     "introduction": {
       ...this.model,
-      text: "Seja bem-vindo ao Ambulatório da pediatria, poderia informar sobre você? "+
+      text: "Seja bem-vindo ao Ambulatório da pediatria, poderia informar sobre você?\n"+
             "Digite um dos números abaixo.\n"+
             "1. Sou paciente e é minha primeira vez no HC\n"+
             "2. Sou paciente cadastrado\n"+
@@ -95,6 +96,19 @@ export class ChatComponentComponent {
         },
       });
       this.lastMessage = this.messages.slice(-1)[0];
+      if (this.lastMessage?.options[0] == "finish"){
+        this.messages.push({
+          text: this.messageList["finish"].text,
+          date: new Date(),
+          type: 'text',
+          reply: false,
+          options: this.messageList[optionValue]?.options,
+          user: {
+            name: 'Bot',
+            avatar: 'https://i.gifer.com/no.gif',
+          },
+        });
+      }
     } else {
       this.messages.push({
         text: "Opção inválida, digite um número válido",
@@ -123,8 +137,12 @@ export class ChatComponentComponent {
     this.sendReply(event.message);
   }
 
-  constructor() {
+  constructor(private router: Router) {
     this.messages.push(this.messageList['introduction']);
     this.lastMessage = this.messages.slice(-1)[0];
+  }
+
+  returnMainPage(): void {
+    this.router.navigate(['/home']);
   }
 }

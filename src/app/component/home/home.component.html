@@ -1,0 +1,44 @@
+<nb-layout center>
+    <nb-layout-column>
+        <h1> Bem-vindo ao Ambulatório de Pediatria do Hospital das Clínicas da UNICAMP </h1>
+        <nb-card accent="success">
+            <nb-card-header>Orientações para primeira visita</nb-card-header>
+            <nb-card-body>
+                Antes de realizar qualquer consulta no HC, visite a faixa amarela para realizar o cadastro e tenha consigo esses documentos:
+                <ul>
+                    <li>Documento de identidade com foto do paciente </li>
+                    <li>Caso tenha acompanhante, documento de identidade do responsável do paciente </li>
+                    <li>Comprovante de endereço</li>
+                    <li>Endereço de email usado no agendamento</li>
+                </ul>
+            </nb-card-body>
+        </nb-card>
+        <nb-card accent="success">
+            <nb-card-header>Dúvidas comuns</nb-card-header>
+            <nb-card-body>
+                <nb-accordion>
+                    <nb-accordion-item>
+                        <nb-accordion-item-header> Onde é o ambulatório de pediatria? </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            Segundo andar do HC na faixa cinza.
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                    <nb-accordion-item>
+                        <nb-accordion-item-header> Preciso agendar uma consulta </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            Siga as orientações do site oficial do Hospital das Clínicas <a href="https://hc.unicamp.br/pacientes/consultas-e-exames/">aqui</a>.
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                </nb-accordion>
+                <br/>
+                Não achou sua dúvida? Clique aqui e use o chatbot
+            </nb-card-body>
+            <nb-card-footer>
+                <button nbButton status="primary" (click)="startChatbot()">Usar chatbot</button>
+            </nb-card-footer>
+        </nb-card>
+    </nb-layout-column>
+
+    <nb-layout-footer fixed>
+    </nb-layout-footer>
+</nb-layout>
