@@ -7,19 +7,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat-component.component.css']
 })
 export class ChatComponentComponent {
+  botUser: any = {
+    name: 'Bot',
+    avatar: 'https://i.gifer.com/no.gif',
+  }
+
+  visitanteUser: any = {
+    name: 'Visitante',
+    avatar: 'https://i.gifer.com/no.gif',
+  }
+  
   model: any = {
     date: new Date(),
     reply: false,
-    user: {
-      name: 'Bot',
-      avatar: 'https://i.gifer.com/no.gif',
-    }
+    user: this.botUser
   }
 
   messageList: any = {
     "introduction": {
       ...this.model,
-      text: "Seja bem-vindo ao Ambulatório da pediatria, poderia informar sobre você?\n"+
+      text: "Seja bem-vindo ao Ambulatório da pediatria, poderia informar sobre você?\n\n"+
             "Digite um dos números abaixo.\n"+
             "1. Sou paciente e é minha primeira vez no HC\n"+
             "2. Sou paciente cadastrado\n"+
@@ -73,7 +80,8 @@ export class ChatComponentComponent {
     },
     "finish": {
       ...this.model,
-      text: "Despedida\n"
+      text: "Agradecemos por usar o nosso chatbot!\n\nCaso não tenha encontrado sua dúvida, consulte nosso FAQ na página inicial ou digite 1 para começar a conversa novamente\n",
+      options: ['introduction']
     }
   };
 
@@ -84,56 +92,39 @@ export class ChatComponentComponent {
   sendReply(reply: string){
     const optionValue: any = this.lastMessage?.options[parseInt(reply)-1];
     if (!!this.messageList[optionValue]){
-      this.messages.push({
-        text: this.messageList[optionValue].text,
-        date: new Date(),
-        type: 'text',
-        reply: false,
-        options: this.messageList[optionValue]?.options,
-        user: {
-          name: 'Visitante',
-          avatar: 'https://i.gifer.com/no.gif',
-        },
-      });
+      this.pushMessage(this.messageList[optionValue].text, false, this.botUser, this.messageList[optionValue]?.options)
       this.lastMessage = this.messages.slice(-1)[0];
-      if (this.lastMessage?.options[0] == "finish"){
-        this.messages.push({
-          text: this.messageList["finish"].text,
-          date: new Date(),
-          type: 'text',
-          reply: false,
-          options: this.messageList[optionValue]?.options,
-          user: {
-            name: 'Bot',
-            avatar: 'https://i.gifer.com/no.gif',
-          },
-        });
-      }
+      this.sendNextOption(reply);
     } else {
-      this.messages.push({
-        text: "Opção inválida, digite um número válido",
-        date: new Date(),
-        type: 'text',
-        reply: false,
-        user: {
-          name: 'Bot',
-          avatar: 'https://i.gifer.com/no.gif',
-        },
-      });
+      this.sendInvalidOption();
     }
   }
 
-  sendMessage(event: any) {
+  sendNextOption(reply: string){
+    const optionValue: any = this.lastMessage?.options[parseInt(reply)-1];
+    if (this.lastMessage?.options[0] == "finish"){
+      this.pushMessage(this.messageList["finish"].text, false, this.botUser, this.messageList["finish"]?.options)
+      this.lastMessage = this.messages.slice(-1)[0];
+    }
+  }
+
+  sendInvalidOption(){
+    this.pushMessage("Opção inválida, digite um número válido", false, this.botUser )
+  }
+
+  pushMessage(message: string, isReply: boolean, iconModel: any, options ?: any){
     this.messages.push({
-      text: event.message,
+      text: message,
       date: new Date(),
       type: 'text',
-      reply: true,
-      user: {
-        name: 'Visitante',
-        avatar: 'https://i.gifer.com/no.gif',
-      },
+      reply: isReply,
+      options: options, 
+      user: iconModel,
     });
+  }
+
+  sendMessage(event: any) {
+    this.pushMessage(event.message, true, this.visitanteUser)
     this.sendReply(event.message);
   }
 
