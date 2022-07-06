@@ -91,7 +91,7 @@ export class ChatComponentComponent {
     },
     'scheduled-exam': {
       ...this.model,
-      text: 'Retire sua senha física, aguarde para ser atendido e certifique-se que tem seu documento de identidade com foto e o email usado no agendamento.\n',
+      text: 'Retire sua senha física e aguarde para ser atendido/a. Por favor, certifique-se que seu documento de identidade com foto e o email usado no agendamento estão com você.\n',
       options: ['finish'],
     },
     'not-scheduled-exam-by-email': {
