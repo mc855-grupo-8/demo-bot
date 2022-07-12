@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {}
 
@@ -17,5 +20,9 @@ export class HomeComponent implements OnInit {
 
   credits(): void {
     this.router.navigate(['/project-credits']);
+  }
+
+  sendFeedback(): void {
+    this.document.location.href = 'https://forms.gle/69b6t9anNfGVEjLs9';
   }
 }
