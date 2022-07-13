@@ -1,15 +1,16 @@
 <nb-layout center>
     <nb-layout-column>
-        <h1> Bem-vindo ao Ambulatório de Pediatria do Hospital das Clínicas da UNICAMP </h1>
+        <h1 style="text-align: center;"> Bem-vindo ao Ambulatório de Pediatria do Hospital das Clínicas da UNICAMP </h1>
         <nb-card accent="success">
             <nb-card-header>Orientações para primeira visita</nb-card-header>
             <nb-card-body>
-                Antes de realizar qualquer consulta no HC, visite a faixa amarela para realizar o cadastro e tenha consigo esses documentos:
+                Antes de realizar qualquer consulta no HC, visite a faixa amarela para realizar o cadastro e tenha
+                consigo esses documentos:
                 <ul>
                     <li>Documento de identidade com foto do paciente </li>
                     <li>Caso tenha acompanhante, documento de identidade do responsável do paciente </li>
                     <li>Comprovante de endereço</li>
-                    <li>Endereço de email usado no agendamento</li>
+                    <li>Endereço de email usado no agendamento (caso tenha consulta agendada)</li>
                 </ul>
             </nb-card-body>
         </nb-card>
@@ -20,17 +21,29 @@
                     <nb-accordion-item>
                         <nb-accordion-item-header> Onde é o ambulatório de pediatria? </nb-accordion-item-header>
                         <nb-accordion-item-body>
-                            Segundo andar do HC na faixa cinza.
+                            Rua Vital Brasil, 251 - Cidade Universitária, Campinas - SP. Terceiro
+                            andar do HC na faixa
+                            cinza.
                         </nb-accordion-item-body>
                     </nb-accordion-item>
+
                     <nb-accordion-item>
                         <nb-accordion-item-header> Preciso agendar uma consulta </nb-accordion-item-header>
                         <nb-accordion-item-body>
-                            Siga as orientações do site oficial do Hospital das Clínicas <a href="https://hc.unicamp.br/pacientes/consultas-e-exames/">aqui</a>.
+                            Siga as orientações do site oficial do Hospital das Clínicas <a
+                                href="https://hc.unicamp.br/pacientes/consultas-e-exames/">aqui</a>.
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+
+                    <nb-accordion-item>
+                        <nb-accordion-item-header> Preciso levar uma criança, e agora? </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            É recomendado que o responsável legal do paciente esteja presente, além e levar os
+                            documentos do responsável e do paciente.
                         </nb-accordion-item-body>
                     </nb-accordion-item>
                 </nb-accordion>
-                <br/>
+                <br />
                 Não achou sua dúvida? Clique aqui e use o chatbot
             </nb-card-body>
             <nb-card-footer>
@@ -39,8 +52,10 @@
         </nb-card>
     </nb-layout-column>
     <nb-layout-footer fixed>
-        <button nbButton status="primary" (click)="credits()" style="text-align: right;">Creditos</button>
+        <button nbButton status="primary" (click)="credits()" style="text-align: right;">Créditos</button>
         &nbsp;&nbsp;&nbsp;
         <button nbButton status="primary" (click)="sendFeedback()" style="text-align: right;">Enviar feedback</button>
+        &nbsp;&nbsp;&nbsp;
+        <button nbButton status="primary" (click)="redirectToContacts()" style="text-align: right;">Contato</button>
     </nb-layout-footer>
 </nb-layout>
