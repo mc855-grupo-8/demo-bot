@@ -38,9 +38,8 @@
             </nb-card-footer>
         </nb-card>
     </nb-layout-column>
-    <nb-layout-footer fixed>
-        <button nbButton status="primary" (click)="credits()" style="text-align: right;">Creditos</button>
-        &nbsp;&nbsp;&nbsp;
-        <button nbButton status="primary" (click)="sendFeedback()" style="text-align: right;">Enviar feedback</button>
+    <nb-layout-footer fixed style="flex-basis: auto;">
+        <button nbButton status="primary" (click)="sendFeedback()" style="margin: 5px; text-align: right;">Enviar feedback</button>
+        <button nbButton status="primary" (click)="credits()" style="margin: 5px; text-align: right;">Compartilhe</button>
     </nb-layout-footer>
 </nb-layout>
