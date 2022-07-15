@@ -66,4 +66,38 @@ functionRouteName(): void {
 
 # Como subir no firebase
 
-// todo
+Para que o deploy dos arquivos estáticos sejam feitos no firebase, são necessários alguns pré-requisitos. Primeiramente, é necessário que seu usuário google tenha acesso ao projeto criado no firebase. Se não tiver, entre em contato com os mantenedores do projeto.
+
+Após garantido acesso ao dashboard do projeto no firebase, com o `npm` instale o `firebase-tools`:
+
+```
+npm install -g firebase-tools
+```
+
+Após a instalação do `firebase-tools`, navegue até o diretório raiz do projeto e faça login com o firebase:
+
+```
+firebase login
+```
+
+Efetuado o login, basta agora iniciar o contexto do firebase para o projeto:
+
+```
+firebase init
+```
+
+O comando acima apresentará um CLI com várias perguntas para inicialização do contexto dentro do projeto. Será criado na raiz do projeto um diretório de implantação da aplicação (o padrão é `public`) em que deverão ser colocados todos os arquivos estáticos gerados pelo angular e que posteriormente serão implantados durante o processo de deploy.
+
+Para gerar os arquivos estáticos, basta rodar o comando:
+
+```
+ng build demo-bot
+```
+
+O angular irá gerar os arquivos estáticos dentro da pasta `dist\demo-bot` localizada na raiz do projeto. Copie TODOS os arquivos gerados nesta pasta para o diretório `public` previamente configurado para o firebase.
+
+Depois de copiados os arquivos estáticos, para finalmente efetuar o deploy basta rodar o comando:
+
+```
+firebase deploy
+```
