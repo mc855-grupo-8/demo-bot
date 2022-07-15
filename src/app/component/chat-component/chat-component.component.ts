@@ -111,7 +111,13 @@ export class ChatComponentComponent {
     'feedback': {
       ...this.model,
       text: 'Nós amamos ouvir os nossos pacientes, nos envie uma sugestão ou crítica através do link abaixo.',
+      options: ['restart']
     },
+    'restart': {
+      ...this.model,
+      text: 'Caso deseje reiniciar o bot, digite 1',
+      options: ['introduction'],
+    }
   };
 
   messages: any[] = [];
@@ -146,20 +152,30 @@ export class ChatComponentComponent {
           this.botUser,
           this.messageList['finish']?.options,
         );
-        
-        this.lastMessage = this.messages.slice(-1)[0];
 
-        setTimeout(() => {
-          this.pushMessage(
-            this.messageList['feedback'].text,
-            false,
-            this.botUser,
-            this.messageList['feedback']?.options,
-            "link"
-          );
-          this.lastMessage = this.messages.slice(-1)[0];
-        }, 4000);
-      }, 4000);
+      setTimeout(() => {
+        this.pushMessage(
+          this.messageList['restart'].text,
+          false,
+          this.botUser,
+          this.messageList['restart']?.options
+        );
+        this.lastMessage = this.messages.slice(-1)[0];
+      }, 2000);
+
+        this.lastMessage = this.messages.slice(-1)[0];
+      }, 2000);
+
+      setTimeout(() => {
+        this.pushMessage(
+          this.messageList['feedback'].text,
+          false,
+          this.botUser,
+          this.messageList['feedback']?.options,
+          "link"
+        );
+        this.lastMessage = this.messages.slice(-1)[0];
+      }, 2000);
     }
   }
 
